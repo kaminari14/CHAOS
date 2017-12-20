@@ -8,13 +8,13 @@ import time
 
 win= GraphWin("my win", 600, 600)
 
-col=[["" for i in range(12)] for j in range(9)]     #9x12 array that reresents the state of the cube
+col=[["" for i in range(12)] for j in range(9)]
 
 
 #reset
 
 
-for i in range(0, 9):                   #setting the state to completely solved
+for i in range(0, 9):
     for j in range(0,12):
         if j>5 and j<9 and i<3:
             col[i][j]="yellow"
@@ -31,19 +31,55 @@ for i in range(0, 9):                   #setting the state to completely solved
             col[i][j] = "white"
 
 
-scramble= input("enter scramble")         #input scramble algorithm here
-moves.breakscram(scramble, col)           #does a scramble on the solved state of the cube to get unsolved state
+scramble= input("enter scramble")
+moves.breakscram(scramble, col)
 
 t=time.time()
-cross.makecross(col)               #solves cross
-f2l.dof2l(col)                     #solves f2l
-oll.solveoll(col)                  #solves oll
-pll.solvepll(col)                  #slves pll
+cr=cross.makecross(col)
+f2=f2l.dof2l(col)
+ol=oll.solveoll(col)
+pl=pll.solvepll(col)
+
+print("cross", cr)
+print("f2l", f2)
+print("oll", ol)
+print("pll", pl)
+fullsol=cr+" "+f2+" "+ol+" "+pl
+
+print("------------------")
+
+fullsol=fullsol.replace("R R'", "")
+fullsol=fullsol.replace("L L'", "")
+fullsol=fullsol.replace("F F'", "")
+fullsol=fullsol.replace("D D'", "")
+fullsol=fullsol.replace("B B'", "")
+fullsol=fullsol.replace("U U'", "")
+fullsol=fullsol.replace("U U", "U2")
+fullsol=fullsol.replace("F F", "F2")
+fullsol=fullsol.replace("D D", "D2")
+fullsol=fullsol.replace("B B", "B2")
+fullsol=fullsol.replace("L L", "L2")
+fullsol=fullsol.replace("R R", "R2")
+fullsol=fullsol.replace("U2 U", "U'")
+fullsol=fullsol.replace("F2 F", "F'")
+fullsol=fullsol.replace("D2 D", "D'")
+fullsol=fullsol.replace("B2 B", "B'")
+fullsol=fullsol.replace("L2 L", "L'")
+fullsol=fullsol.replace("R2 R", "R'")
+fullsol=fullsol.replace("U2 U'", "U")
+fullsol=fullsol.replace("F2 F'", "F")
+fullsol=fullsol.replace("D2 D'", "D")
+fullsol=fullsol.replace("B2 B'", "B")
+fullsol=fullsol.replace("L2 L'", "L")
+fullsol=fullsol.replace("R2 R'", "R")
+
+print("full solution:", fullsol)
+print("solution length:", len(fullsol.split(" ")))
 
 print(time.time()-t)
 
 p=-1
-for j in range(10, 270, 30):            #use the 9*12 array with your graphic library to print out the solved state
+for j in range(10, 270, 30):
     p+=1
     q=-1
     for i in range (10,360, 30):
