@@ -8,6 +8,7 @@ import moves
 def dof2l(col):
     t=time.time()
     max=0
+    fsol=""
     while(max<100):
         max=0
         maxi = ""
@@ -18,10 +19,12 @@ def dof2l(col):
             if hap>= max:
                 max=hap
                 maxi=i
-        print(maxi, max)
+        #print(maxi, max)
+        fsol=fsol+maxi
         moves.breakscram(maxi, col)
     u=time.time()
     print(u-t)
+    return fsol
 
 
 def happiness(col,scram):

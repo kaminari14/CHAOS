@@ -50,9 +50,10 @@ def solvepll(col):
                         break
                 fullpll = pre + " " + i + " " + post
                 moves.breakscram(i + " " + post, col)
-                print(fullpll)
+                #print(fullpll)
                 flag = 1
                 break
         if flag == 1:
             break
     print(time.time()-t)
+    return fullpll

@@ -39,9 +39,10 @@ def solveoll(col):
             tcol[1][7] == "yellow" and tcol[1][8]=="yellow" and tcol[2][6]=="yellow" and tcol[2][7]=="yellow" and tcol[2][8]=="yellow"):
                 fulloll=pre + " " + i
                 moves.breakscram(i, col)
-                print(fulloll)
+                #print(fulloll)
                 flag=1
                 break
         if flag == 1:
             break
     print(time.time()-t)
+    return fulloll

@@ -9,6 +9,7 @@ import moves
 def makecross(col):
     t=time.time()
     max=0
+    csol=""
     while(max<100):
         max=0
         maxi = ""
@@ -19,10 +20,12 @@ def makecross(col):
             if hap>= max:
                 max=hap
                 maxi=i
-        print(maxi)
+        csol=csol+ maxi
+        #print(maxi)
         moves.breakscram(maxi, col)
     u=time.time()
     print(u-t)
+    return csol
 
 
 
