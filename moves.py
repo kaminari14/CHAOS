@@ -44,29 +44,6 @@ def breakscram(scramble, col):
 
 
 
-def right(newcol):
-    tcol=[x[:] for x in newcol]
-    newcol[0][8] = tcol[3][8]
-    newcol[1][8] = tcol[4][8]
-    newcol[2][8] = tcol[5][8]
-    newcol[3][0] = tcol[2][8]
-    newcol[3][8] = tcol[6][8]
-    newcol[3][9] = tcol[5][9]
-    newcol[3][10] = tcol[4][9]
-    newcol[3][11] = tcol[3][9]
-    newcol[4][0] = tcol[1][8]
-    newcol[4][8] = tcol[7][8]
-    newcol[4][9] = tcol[5][10]
-    newcol[4][10] = tcol[4][10]
-    newcol[4][11] = tcol[3][10]
-    newcol[5][0] = tcol[0][8]
-    newcol[5][8] = tcol[8][8]
-    newcol[5][9] = tcol[5][11]
-    newcol[5][10] = tcol[4][11]
-    newcol[5][11] = tcol[3][11]
-    newcol[6][8] = tcol[5][0]
-    newcol[7][8] = tcol[4][0]
-    newcol[8][8] = tcol[3][0]
 
 
 def right(newcol):
