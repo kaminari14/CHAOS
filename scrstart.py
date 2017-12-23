@@ -6,6 +6,8 @@ import oll
 import pll
 import time
 
+logs = open("/tmp/logf.txt", "a")
+
 win= GraphWin("my win", 600, 600)
 
 col=[["" for i in range(12)] for j in range(9)]
@@ -33,6 +35,7 @@ for i in range(0, 9):
 
 scramble= input("enter scramble")
 moves.breakscram(scramble, col)
+logs.write(str(col))
 
 t=time.time()
 cr=cross.makecross(col)

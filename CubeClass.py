@@ -34,6 +34,14 @@ class cube:
         self.txt_scramble_attr = urwid.AttrMap(self.txt_scramble,'bg',focus_map="form")
         self.chk_scan = urwid.CheckBox("Scan the CUBE")
         self.thescramble=""
+        self.set_side("Y"*9, "U")
+        self.set_side("R"*9, "L")
+        self.set_side("O"*9, "R")
+        self.set_side("B"*9, "B")
+        self.set_side("G"*9, "F")
+        self.set_side("W"*9, "D")
+        self.set_cube_array()
+        self.thesolution=""
 
     def _draw_boxes(self,itteration,colorofside):
         thetext=""
@@ -79,42 +87,70 @@ class cube:
         else:
             pass
 
+    def get_side_from_array(self,thearray):
+        forup=""
+        fordown=""
+        forfront=""
+        forback=""
+        forleft=""
+        forright=""
+        for i in range(0, 9):
+            for j in range(0, 12):
+                if j > 5 and j < 9 and i < 3:
+                    forup+=self._vtofarray(thearray[i][j])
+                if i > 2 and i < 6:
+                    if j < 3:
+                        forback+=self._vtofarray(thearray[i][j])
+                    if j > 2 and j < 6:
+                        forleft+=self._vtofarray(thearray[i][j])
+                    if j > 5 and j < 9:
+                        forfront+=self._vtofarray(thearray[i][j])
+                    if j > 8 and j < 12:
+                        forright+=self._vtofarray(thearray[i][j])
+                if j > 5 and j < 9 and i > 5:
+                    fordown+=self._vtofarray(thearray[i][j])
+        self.set_side(forup,"U")
+        self.set_side(fordown,"D")
+        self.set_side(forfront,"F")
+        self.set_side(forback,"B")
+        self.set_side(forleft,"L")
+        self.set_side(forright,"R")
+
     def get_side(self,side):
         tside=""
-        if(side == 'U'):
+        if(side == "U"):
            for i in self._up:
-               if(i[1]=='▛▔▔▔▔▜'):
+               if(i[1]=="▛▔▔▔▔▜"):
                    tside+=i[0]
-        if(side == 'D'):
+        if(side == "D"):
             for i in self._down:
-                if(i[1]=='▛▔▔▔▔▜'):
+                if(i[1]=="▛▔▔▔▔▜"):
                     tside+=i[0]
-        if(side == 'L'):
+        if(side == "L"):
             for i in self._left:
-                if(i[1]=='▛▔▔▔▔▜'):
+                if(i[1]=="▛▔▔▔▔▜"):
                     tside+=i[0]
-        if(side == 'R'):
+        if(side == "R"):
             for i in self._right:
-                if(i[1]=='▛▔▔▔▔▜'):
+                if(i[1]=="▛▔▔▔▔▜"):
                     tside+=i[0]
-        if(side == 'F'):
+        if(side == "F"):
             for i in self._front:
-                if(i[1]=='▛▔▔▔▔▜'):
+                if(i[1]=="▛▔▔▔▔▜"):
                     tside+=i[0]
-        if(side == 'B'):
+        if(side == "B"):
             for i in self._back:
-                if(i[1]=='▛▔▔▔▔▜'):
+                if(i[1]=="▛▔▔▔▔▜"):
                     tside+=i[0]
         return tside
 
-    def get_cube_array(self):
-        k=0
-        up=self.get_side('U')
-        down=self.get_side('D')
-        front=self.get_side('F')
-        back=self.get_side('B')
-        left=self.get_side('L')
-        right=self.get_side('R')
+    def set_cube_array(self):
+        up=self.get_side("U")
+        down=self.get_side("D")
+        front=self.get_side("F")
+        back=self.get_side("B")
+        left=self.get_side("L")
+        right=self.get_side("R")
         uptemp=0
         downtemp=0
         lefttemp=0
@@ -124,28 +160,53 @@ class cube:
         for i in range(0, 9):
             for j in range(0, 12):
                 if j > 5 and j < 9 and i < 3:
-                    logs.write("---DEBUG::"+str(uptemp)+"----")
-                    self.cubearray[i][j] = up[uptemp]
+                    self.cubearray[i][j] = self._vtofarray(up[uptemp])
                     uptemp=uptemp+1
                 if i > 2 and i < 6:
                     if j < 3:
-                        self.cubearray[i][j] = back[backtemp]
+                        self.cubearray[i][j] = self._vtofarray(back[backtemp])
                         backtemp=backtemp+1
                     if j > 2 and j < 6:
-                        self.cubearray[i][j] = left[lefttemp]
+                        self.cubearray[i][j] = self._vtofarray(left[lefttemp])
                         lefttemp=lefttemp+1
                     if j > 5 and j < 9:
-                        self.cubearray[i][j] = front[fronttemp]
+                        self.cubearray[i][j] = self._vtofarray(front[fronttemp])
                         fronttemp=fronttemp+1
                     if j > 8 and j < 12:
-                        self.cubearray[i][j] = right[righttemp]
+                        self.cubearray[i][j] = self._vtofarray(right[righttemp])
                         righttemp=righttemp+1
                 if j > 5 and j < 9 and i > 5:
-                    self.cubearray[i][j] = down[downtemp]
+                    self.cubearray[i][j] = self._vtofarray(down[downtemp])
                     downtemp=downtemp+1
         return self.cubearray
 
+    def _vtofarray(self,vtofstring):
+        if vtofstring=="R":
+            return "red"
+        if vtofstring=="W":
+            return "white"
+        if vtofstring=="O":
+            return "orange"
+        if vtofstring=="B":
+            return "blue"
+        if vtofstring=="G":
+            return "green"
+        if vtofstring=="Y":
+            return "yellow"
 
+
+        if vtofstring=="red":
+            return "R"
+        if vtofstring=="white":
+            return "W"
+        if vtofstring=="orange":
+            return "O"
+        if vtofstring=="blue":
+            return "B"
+        if vtofstring=="green":
+            return "G"
+        if vtofstring=="yellow":
+            return "Y"
 
     def draw_cube(self):
         blank = urwid.Text(" "*162, layout=_SideLayout())
@@ -181,7 +242,7 @@ class cube:
 
         #CUBE LAYOUT
         gf1 = urwid.GridFlow([blank, self.up, blank, blank, self.left, self.front, self.right, self.back, blank, self.down, blank, blank],
-                             cell_width=18, h_sep=1, v_sep=1, align='center')
+                             cell_width=18, h_sep=1, v_sep=1, align="center")
         #CUBE LAYOUT ENDS
 
         #RIGHT FORM
@@ -240,7 +301,7 @@ class cube:
         #~THEFRAME
         return frame1
 
-    def update_cube(self):
+    def update_cube(self,statusline):
         logs.write("start update\n")
         self.left.set_text(self._left)
         self.right.set_text(self._right)
@@ -248,6 +309,7 @@ class cube:
         self.down.set_text(self._down)
         self.front.set_text(self._front)
         self.back.set_text(self._back)
+        self.footer1.set_text(statusline)
         logs.write("end update\n")
 
 
