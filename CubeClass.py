@@ -14,6 +14,18 @@ class _LogoLayout(urwid.TextLayout):
                 [(37, 222, 259)], [(37, 259, 296)], [(37, 296, 333)], [(37, 333, 370)], [(37, 370, 407)], [(37, 407, 444)]
             , [(37, 444, 481)], [(37, 481, 518)], [(37, 518, 555)], [(37, 555, 592)]]
 
+
+'''
+class _StatusLayout(urwid.TextLayout):
+    def layout(self, text, width, align, wrap ):
+        ll=len(text)
+        if ll>width:
+           diff=ll-width
+        isless=True
+        while isless:
+            if diff/width==
+'''
+
 class cube:
     def __init__(self):
         self._up = []
@@ -30,7 +42,7 @@ class cube:
         self.front = []
         self.cubearray = [["" for i in range(12)] for j in range(9)]
         self.footer1 = urwid.Text("")
-        self.txt_scramble=urwid.Edit("Enter Scramble: \n",u"",align='left')
+        self.txt_scramble=urwid.Edit("Enter Scramble: \n","",align='left')
         self.txt_scramble_attr = urwid.AttrMap(self.txt_scramble,'bg',focus_map="form")
         self.chk_scan = urwid.CheckBox("Scan the CUBE")
         self.thescramble=""
@@ -301,7 +313,7 @@ class cube:
         #~THEFRAME
         return frame1
 
-    def update_cube(self,statusline):
+    def update_cube(self):
         logs.write("start update\n")
         self.left.set_text(self._left)
         self.right.set_text(self._right)
@@ -309,7 +321,27 @@ class cube:
         self.down.set_text(self._down)
         self.front.set_text(self._front)
         self.back.set_text(self._back)
-        self.footer1.set_text(statusline)
         logs.write("end update\n")
 
+    def set_solution(self,soluchan):
+        self.thesolution=soluchan
+        temp=["The Solution is : "]
+        for i,j in enumerate(soluchan.split()):
+            temp+=[('G',j)]
+        self.footer1.set_text(temp)
 
+    def loading(self,loadcount,position):
+        if loadcount == 0:
+            tmp="-"
+        if loadcount == 1:
+            tmp="|"
+        if loadcount == 2:
+            tmp="/"
+
+        temp=["  "+tmp+"  Solving : "]
+        for i,j in enumerate(self.thesolution.split()):
+            if i==position:
+                temp+=[('header',j)]
+            else:
+                temp+=[('G',j)]
+            self.footer1.set_text(temp)
