@@ -1,6 +1,7 @@
 import sys
 import tempfile
 import serial
+import copy
 import urwid
 import threading
 import CubeClass
@@ -11,7 +12,9 @@ import oll
 import pll
 
 
-handle = ""
+handle_check_serial = ""
+handle_loading = ""
+loadcount=0
 logs = CubeClass.logs
 #look_file = tempfile.TemporaryFile()
 look_file = open('.temp','w+')
@@ -32,8 +35,25 @@ palette = [
 
 ]
 
-cube = CubeClass.cube()
 
+ardtopy={"a":moves.right,"b":moves.rightd,"c":moves.right2,
+         "d":moves.left,"e":moves.leftd,"f":moves.left2,
+         "g":moves.up,"h":moves.upd,"i":moves.up2,
+         "j":moves.down,"k":moves.downd,"l":moves.down2,
+         "m":moves.front,"n":moves.frontd,"o":moves.front2,
+         "p":moves.back,"q":moves.backd,"r":moves.back2,
+         "R":"a","R'":"b","R2":"c","L":"d","L'":"e","L2":"f","U":"g","U'":"h","U2":"i","D":"j","D'":"k","D2":"l","F":"m","F'":"n","F2":"o","B":"p","B'":"q","B2":"r"}
+
+def _py_to_ard(itterable):
+    ans=""
+    for i in itterable:
+        if i in ardtopy:
+            ans+=ardtopy[i]
+    ans+="z\n"
+    return ans
+
+
+cube = CubeClass.cube()
 
 def onclick(key):  # {
     if key in ('s', 'S'):
@@ -56,14 +76,16 @@ def on_submit(button, user_data):
         # code for scanning goes here
     else:
         moves.breakscram(cube.thescramble, cube.cubearray)
-        logs.write("----HERE KITTY----\n")
         logs.write(str(cube.cubearray))
         cube.get_side_from_array(cube.cubearray)
         cube.update_cube()
         cube.footer1.set_text(["Finding Solution for : ", ("R", cube.thescramble)])
         #logicthread.start()
         ml.draw_screen()
-        do_logic()
+        do_logic()# sets solution
+
+
+
 
 
 
@@ -85,12 +107,6 @@ def clear_scramble(et, thenew):
         cube.txt_scramble_attr.set_attr_map({'hidebg': None})
         cube.footer1.set_text('true')
 
-def changestuff():
-    look_file.seek(0)
-    new_status = look_file.readline()
-    cube.footer1.set_text(new_status)
-    ml.draw_screen()
-    ml.remove_watch_file(handle)
 
 def get_full_sol(fullsol):
     fullsol = fullsol.replace("R R'", "")
@@ -121,35 +137,51 @@ def get_full_sol(fullsol):
 
 
 def do_logic():
-    global handle
-    cr = cross.makecross(cube.cubearray)
-    f2 = f2l.dof2l(cube.cubearray)
-    ol = oll.solveoll(cube.cubearray)
-    pl = pll.solvepll(cube.cubearray)
-    # cube.thesolution = get_full_sol(cr + " " + f2 + " " + ol + " " + pl)
+    cubearraycopy=copy.deepcopy(cube.cubearray)
+    cr = cross.makecross(cubearraycopy)
+    f2 = f2l.dof2l(cubearraycopy)
+    ol = oll.solveoll(cubearraycopy)
+    pl = pll.solvepll(cubearraycopy)
     cube.set_solution(get_full_sol(cr + " " + f2 + " " + ol + " " + pl))
-    # look_file.write(cube.thesolution)
-    # look_file.seek(0)
-    # handle=ml.watch_file(look_file,changestuff)
+    kellogs.write(_py_to_ard(cube.thesolution.split(" ")).encode())
+    global handle_check_serial
+    handle_check_serial=ml.set_alarm_in(1,check_serial,"")
+    handle_loading=ml.set_alarm_in(0.5,loadingstatus,"")
 
-def alarmtest(theml,data):
-    cube.footer1.set_text(data)
-    ml.set_alarm_in(3,alarmtest,"brother")
 
 
 def check_serial(theml ,data):
-    currentover = kellogs.readline()
+    global  handle_check_serial
+    currentover = kellogs.read().decode()
+    if currentover in ardtopy:
+        ardtopy[currentover](cube.cubearray) # move virtualcube
+        cube.get_side_from_array(cube.cubearray)
+        cube.update_cube()
+        cube.position=cube.position+1
+    if currentover == 'z':
+        theml.remove_alarm(handle_loading)
+        cube.footer1.set_text("finito")
+        theml.remove_alarm(handle_check_serial)
+    else:
+        handle_check_serial=theml.set_alarm_in(1,check_serial,"")
 
 
-
+def loadingstatus(theml,data):
+    global loadcount
+    if loadcount>2:
+        loadcount=0
+    loadcount=loadcount+1
+    cube.loading(loadcount)
+    theml.draw_screen()
+    handle_loading=theml.set_alarm_in(0.5,loadingstatus,"")
 
 
 if len(sys.argv)!=2:
     valid=False
 else:
     valid=True
-    port=sys.argv[1]
-    kellogs=serial.Serial(port=port,timeout=1)
+    #port=sys.argv[1]
+    #kellogs=serial.Serial(port=port,timeout=1)
 
 if valid:
     thescreen = cube.draw_cube()
@@ -161,8 +193,6 @@ if valid:
     ml = urwid.MainLoop(thescreen, palette, unhandled_input=onclick)
     ml.screen.set_terminal_properties(colors=256)
     urwid.set_encoding("utf-8")
-    #handle=ml.watch_file(look_file, changestuff)
-    ml.set_alarm_in(1,check_serial)
     ml.run()
 else:
     print("::usage::\n"+sys.argv[0]+" [com device]\nWhere:\n[com device] -> Arduino Serial Communication Port\n\n")

@@ -54,6 +54,7 @@ class cube:
         self.set_side("W"*9, "D")
         self.set_cube_array()
         self.thesolution=""
+        self.position=0
 
     def _draw_boxes(self,itteration,colorofside):
         thetext=""
@@ -258,22 +259,12 @@ class cube:
         #CUBE LAYOUT ENDS
 
         #RIGHT FORM
-        txt_logo = urwid.Text("█████████████████████████████████████"+
-                              "████ ▄▄▄▄▄ █▀▀ ██▄  █▄ ▄▀█ ▄▄▄▄▄ ████"+
-                              "████ █   █ █▄▀██▀█▀▄█▄ ▀ █ █   █ ████"+
-                              "████ █▄▄▄█ █ ▄ █ ▄▄  █ ▀▀█ █▄▄▄█ ████"+
-                              "████▄▄▄▄▄▄▄█ █ ▀▄█ █ ▀▄█▄█▄▄▄▄▄▄▄████"+
-                              "████▄ ▀ ██▄ █▀█   ▄█▀▀█▄▀█ ▄▄▀▄▄▀████"+
-                              "██████▀▀▀▄▄█▀▀▀   ██ █▀ ▄▄██ ▄  █████"+
-                              "████▀▀ ▀█▄▄▀▀█▄ █ █▄  ▀█▀ ▄██▄█▄▄████"+
-                              "████▄▀▄▄█ ▄ ▀▀█ █ ▄█▄▀▄█ ▀ ▄▄ ▄ ▄████"+
-                              "████▄▄▄█▄▄▄▀▄█▀█ ▀▄█ ███ ▀▀ █▀█▄▀████"+
-                              "████▄██ ▄ ▄▄▀▄▄▄ ██▀█  █▀ █  ██  ████"+
-                              "████▄█▄██▄▄█ █▄▀█▄▄█ ██  ▄▄▄ █ ▀▀████"+
-                              "████ ▄▄▄▄▄ █▄▀▄██▀▄▀████ █▄█ ▀▀▄▀████"+
-                              "████ █   █ █▀ ▄▀ ▀▄██ █▀ ▄   ▀▀▀█████"+
-                              "████ █▄▄▄█ █▀ ▀█  █▀▄    ▀██ ▄▄▀▄████"+
-                              "████▄▄▄▄▄▄▄█▄█▄▄▄▄▄█▄▄██▄▄▄▄▄▄█▄█████",layout=_LogoLayout())
+        txt_logo = urwid.Text("██████╗██╗  ██╗ █████╗  ██████╗ ███████╗"+
+                              "██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔════╝"+
+                              "██║     ███████║███████║██║   ██║███████╗"+
+                              "██║     ██╔══██║██╔══██║██║   ██║╚════██║"+
+                              "╚██████╗██║  ██║██║  ██║╚██████╔╝███████║"+
+                              " ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝")
 
         txt_logo_attr = urwid.AttrMap(txt_logo,'bg','form')
 
@@ -302,7 +293,7 @@ class cube:
         body1=urwid.AttrMap(body1,"bg")
         #FULL BODY ENDS
 
-        header1 = urwid.Text(("header", "Yet Another Cube Solver"), align="center")
+        header1 = urwid.Text(("header", "CHAOS Has A Other Side"), align="center")
         header1 = urwid.AttrMap(header1,"header")
         self.footer1 = urwid.Text(("header","statusline is here"))
         footer1attr = urwid.AttrMap(self.footer1,"header")
@@ -330,7 +321,8 @@ class cube:
             temp+=[('G',j)]
         self.footer1.set_text(temp)
 
-    def loading(self,loadcount,position):
+    def loading(self,loadcount):
+        tmp="-"
         if loadcount == 0:
             tmp="-"
         if loadcount == 1:
@@ -340,7 +332,7 @@ class cube:
 
         temp=["  "+tmp+"  Solving : "]
         for i,j in enumerate(self.thesolution.split()):
-            if i==position:
+            if i==self.position:
                 temp+=[('header',j)]
             else:
                 temp+=[('G',j)]
