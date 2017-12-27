@@ -180,8 +180,8 @@ if len(sys.argv)!=2:
     valid=False
 else:
     valid=True
-    #port=sys.argv[1]
-    #kellogs=serial.Serial(port=port,timeout=1)
+    port=sys.argv[1]
+    kellogs=serial.Serial(port=port,timeout=1)
 
 if valid:
     thescreen = cube.draw_cube()
