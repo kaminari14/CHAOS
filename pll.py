@@ -55,5 +55,5 @@ def solvepll(col):
                 break
         if flag == 1:
             break
-    print(time.time()-t)
+    #print(time.time()-t)
     return fullpll

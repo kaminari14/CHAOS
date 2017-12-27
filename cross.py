@@ -24,7 +24,7 @@ def makecross(col):
         #print(maxi)
         moves.breakscram(maxi, col)
     u=time.time()
-    print(u-t)
+    #print(u-t)
     return csol
 
 

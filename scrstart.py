@@ -1,4 +1,4 @@
-from graphics import *
+#from graphics import *
 import moves
 import cross
 import f2l
@@ -6,7 +6,9 @@ import oll
 import pll
 import time
 
-win= GraphWin("my win", 600, 600)
+logs = open("/tmp/logf.txt", "a")
+
+#win= GraphWin("my win", 600, 600)
 
 col=[["" for i in range(12)] for j in range(9)]
 
@@ -33,6 +35,7 @@ for i in range(0, 9):
 
 scramble= input("enter scramble")
 moves.breakscram(scramble, col)
+logs.write(str(col))
 
 t=time.time()
 cr=cross.makecross(col)
@@ -77,7 +80,7 @@ print("full solution:", fullsol)
 print("solution length:", len(fullsol.split(" ")))
 
 print(time.time()-t)
-
+'''
 p=-1
 for j in range(10, 270, 30):
     p+=1
@@ -91,8 +94,6 @@ for j in range(10, 270, 30):
         rect=Rectangle(Point(i,j),Point(i+20,j+20))
         rect.setFill(col[p][q])
         rect.draw(win)
-
-
-
 win.getMouse()
 win.close()
+'''
