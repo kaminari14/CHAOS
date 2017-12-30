@@ -140,6 +140,7 @@ void Right(bool anticlockwise,bool twice){
         case 3:
             RightState=1;
         break;
+
       }
     }else{
       //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
@@ -159,6 +160,7 @@ void Left(bool anticlockwise,bool twice){
         case 3:
             LeftState=1;
         break;
+
       }
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
