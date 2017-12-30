@@ -49,7 +49,7 @@ int thesteps(int pina,int pinb,int pinc,int pind, bool twice,int state){
 
   } else {
     /* steps 8 times */
-    stepnums=130;
+    stepnums=127;
   }
 
   switch(state) {
@@ -321,6 +321,7 @@ void setup() {
 }
 
 void loop() {
+
     /*make sure to terminate with 'z'
         a - R       d - L      g - Up      j - Dwn      m - Frnt     p-bk
         b - Rinv    e - Linv   h - Upinv   k - Dwninv   n - Frntinv  q-bkinv
