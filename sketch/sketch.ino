@@ -135,17 +135,12 @@ void Right(bool anticlockwise,bool twice){
       RightState=thesteps(10, 11, 12, 13, twice,RightState);
       switch(RightState){
         case 1:
-            RightState=4;
-        break;
-        case 2:
-            RightState=1;
-        break;
-        case 3:
-            RightState=2;
-        break;
-        case 4:
             RightState=3;
         break;
+        case 3:
+            RightState=1;
+        break;
+
       }
     }else{
       //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
@@ -158,19 +153,14 @@ void Left(bool anticlockwise,bool twice){
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
       LeftState=thesteps(6, 7, 8, 9, twice, LeftState);
-            switch(LeftState){
+      switch(LeftState){
         case 1:
-            LeftState=4;
-        break;
-        case 2:
-            LeftState=1;
-        break;
-        case 3:
-            LeftState=2;
-        break;
-        case 4:
             LeftState=3;
         break;
+        case 3:
+            LeftState=1;
+        break;
+
       }
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
@@ -183,18 +173,12 @@ void Up(bool anticlockwise,bool twice){
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
       UpState=thesteps(2, 3, 4, 5, twice, UpState);
-            switch(UpState){
+      switch(UpState){
         case 1:
-            UpState=4;
-        break;
-        case 2:
-            UpState=1;
+            UpState=3;
         break;
         case 3:
-            UpState=2;
-        break;
-        case 4:
-            UpState=3;
+            UpState=1;
         break;
       }
     }else{
@@ -208,18 +192,12 @@ void Down(bool anticlockwise,bool twice){
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
       DownState=thesteps(28, 26, 24, 22, twice, DownState);
-            switch(DownState){
+      switch(DownState){
         case 1:
-            DownState=4;
-        break;
-        case 2:
-            DownState=1;
+            DownState=3;
         break;
         case 3:
-            DownState=2;
-        break;
-        case 4:
-            DownState=3;
+            DownState=1;
         break;
       }
     }else{
@@ -233,18 +211,12 @@ void Front(bool anticlockwise,bool twice){
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
       FrontState=thesteps(36, 34, 32, 30, twice, DownState);
-            switch(FrontState){
+      switch(FrontState){
         case 1:
-            FrontState=4;
-        break;
-        case 2:
-            FrontState=1;
+            FrontState=3;
         break;
         case 3:
-            FrontState=2;
-        break;
-        case 4:
-            FrontState=3;
+            FrontState=1;
         break;
       }
     }else{
@@ -258,18 +230,12 @@ void Back(bool anticlockwise,bool twice){
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
       BackState=thesteps(46, 44, 42, 40, twice, BackState);
-            switch(BackState){
+      switch(BackState){
         case 1:
-            BackState=4;
-        break;
-        case 2:
-            BackState=1;
+            BackState=3;
         break;
         case 3:
-            BackState=2;
-        break;
-        case 4:
-            BackState=3;
+            BackState=1;
         break;
       }
     }else{
@@ -321,7 +287,6 @@ void setup() {
 }
 
 void loop() {
-
     /*make sure to terminate with 'z'
         a - R       d - L      g - Up      j - Dwn      m - Frnt     p-bk
         b - Rinv    e - Linv   h - Upinv   k - Dwninv   n - Frntinv  q-bkinv
