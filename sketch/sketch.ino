@@ -57,7 +57,6 @@ void thesteps(int pina,int pinb,int pinc,int pind, bool twice,int isrev){
       stepnums=128;
       break;
     }
-    stepnums=127;
   }
 
   /*switch(state) {
