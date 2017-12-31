@@ -41,18 +41,25 @@ void zilch(int pina,int pinb,int pinc,int pind){
     digitalWrite(pind, LOW);
 }
 //DEPLOYMENT CODE ENDS
-int thesteps(int pina,int pinb,int pinc,int pind, bool twice,int state){
+void thesteps(int pina,int pinb,int pinc,int pind, bool twice,int isrev){
   int stepnums=0;
   if (twice) {
     /* steps for 180deg */
-    stepnums=258;
+    stepnums=254;
 
   } else {
     /* steps 8 times */
-    stepnums=127;
+    switch (isrev){
+      case 0:
+      stepnums=127;
+      break;
+      case 1:
+      stepnums=128;
+      break;
+    }
   }
 
-  switch(state) {
+  /*switch(state) {
    case 1  :
             for (int i = 0; i <=stepnums; i++) {
             dous(pina,pinb,pinc,pind);
@@ -106,8 +113,17 @@ int thesteps(int pina,int pinb,int pinc,int pind, bool twice,int state){
           }
           return 4;
       break;
-}
-
+} */
+             for (int i = 0; i <=stepnums; i++) {
+            uno(pina,pinb,pinc,pind);
+            delay(3);
+            dous(pina,pinb,pinc,pind);
+            delay(3);
+            tres(pina,pinb,pinc,pind);
+            delay(3);
+            quad(pina,pinb,pinc,pind);
+            delay(3);
+          }
 
 }
 
@@ -132,8 +148,7 @@ void Right(bool anticlockwise,bool twice){
     //Serial.print("--RIGHT--"); //TESTINGSNIPPET
     if(anticlockwise){
       //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      RightState=thesteps(10, 11, 12, 13, twice,RightState);
-      switch(RightState){
+         /*   switch(RightState){
         case 1:
             RightState=3;
         break;
@@ -141,10 +156,20 @@ void Right(bool anticlockwise,bool twice){
             RightState=1;
         break;
 
-      }
+      }*/
+      thesteps(10, 11, 12, 13, twice,RightState);
+      /*switch(RightState){
+        case 1:
+            RightState=3;
+        break;
+        case 3:
+            RightState=1;
+        break;
+
+      }*/
     }else{
       //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      RightState=thesteps(13, 12, 11, 10, twice, RightState);
+      thesteps(13, 12, 11, 10, twice, 0);
     }
 }
 void Left(bool anticlockwise,bool twice){
@@ -152,8 +177,7 @@ void Left(bool anticlockwise,bool twice){
     //Serial.print("--LEFT--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      LeftState=thesteps(6, 7, 8, 9, twice, LeftState);
-      switch(LeftState){
+      /*    switch(LeftState){
         case 1:
             LeftState=3;
         break;
@@ -161,10 +185,20 @@ void Left(bool anticlockwise,bool twice){
             LeftState=1;
         break;
 
-      }
+      }*/
+      thesteps(6, 7, 8, 9, twice, LeftState);
+      /*switch(LeftState){
+        case 1:
+            LeftState=3;
+        break;
+        case 3:
+            LeftState=1;
+        break;
+
+      }*/
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      LeftState=thesteps(9, 8, 7, 6, twice, LeftState);
+      thesteps(9, 8, 7, 6, twice, 0);
     }
 }
 void Up(bool anticlockwise,bool twice){
@@ -172,18 +206,26 @@ void Up(bool anticlockwise,bool twice){
     //Serial.print("--UP--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      UpState=thesteps(2, 3, 4, 5, twice, UpState);
-      switch(UpState){
+          /*switch(UpState){
         case 1:
             UpState=3;
         break;
         case 3:
             UpState=1;
         break;
-      }
+      }*/
+      thesteps(2, 3, 4, 5, twice, UpState);
+      /*switch(UpState){
+        case 1:
+            UpState=3;
+        break;
+        case 3:
+            UpState=1;
+        break;
+      }*/
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      UpState=thesteps(5, 4, 3, 2, twice, UpState);
+      thesteps(5, 4, 3, 2, twice, 0);
     }
 }
 void Down(bool anticlockwise,bool twice){
@@ -191,18 +233,26 @@ void Down(bool anticlockwise,bool twice){
     //Serial.print("--DOWN--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      DownState=thesteps(28, 26, 24, 22, twice, DownState);
-      switch(DownState){
+          /*switch(DownState){
         case 1:
             DownState=3;
         break;
         case 3:
             DownState=1;
         break;
-      }
+      }*/
+      thesteps(28, 26, 24, 22, twice, DownState);
+      /*switch(DownState){
+        case 1:
+            DownState=3;
+        break;
+        case 3:
+            DownState=1;
+        break;
+      }*/
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      DownState=thesteps(22, 24, 26, 28, twice, DownState);
+      thesteps(22, 24, 26, 28, twice, 0);
     }
 }
 void Front(bool anticlockwise,bool twice){
@@ -210,18 +260,26 @@ void Front(bool anticlockwise,bool twice){
     //Serial.print("--FRONT--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      FrontState=thesteps(36, 34, 32, 30, twice, DownState);
-      switch(FrontState){
+         /* switch(FrontState){
         case 1:
             FrontState=3;
         break;
         case 3:
             FrontState=1;
         break;
-      }
+      }*/
+      thesteps(36, 34, 32, 30, twice, DownState);
+      /*switch(FrontState){
+        case 1:
+            FrontState=3;
+        break;
+        case 3:
+            FrontState=1;
+        break;
+      }*/
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      FrontState=thesteps(30, 32, 34, 36, twice, DownState);
+      thesteps(30, 32, 34, 36, twice, 0);
     }
 }
 void Back(bool anticlockwise,bool twice){
@@ -229,18 +287,26 @@ void Back(bool anticlockwise,bool twice){
     //Serial.print("--BACK--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
-      BackState=thesteps(46, 44, 42, 40, twice, BackState);
-      switch(BackState){
+         /* switch(BackState){
         case 1:
             BackState=3;
         break;
         case 3:
             BackState=1;
         break;
-      }
+      }*/
+      thesteps(46, 44, 42, 40, twice, BackState);
+      /*switch(BackState){
+        case 1:
+            BackState=3;
+        break;
+        case 3:
+            BackState=1;
+        break;
+      }*/
     }else{
     //Serial.print("CLOCKWISE--"); //TESTINGSNIPPET
-      BackState=thesteps(40, 42, 44, 46, twice, BackState);
+      thesteps(40, 42, 44, 46, twice, 0);
     }
 }
 void setup() {
