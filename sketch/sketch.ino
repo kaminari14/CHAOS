@@ -45,7 +45,7 @@ int thesteps(int pina,int pinb,int pinc,int pind, bool twice,int state){
   int stepnums=0;
   if (twice) {
     /* steps for 180deg */
-    stepnums=258;
+    stepnums=254;
 
   } else {
     /* steps 8 times */
@@ -132,6 +132,15 @@ void Right(bool anticlockwise,bool twice){
     //Serial.print("--RIGHT--"); //TESTINGSNIPPET
     if(anticlockwise){
       //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+            switch(RightState){
+        case 1:
+            RightState=3;
+        break;
+        case 3:
+            RightState=1;
+        break;
+
+      }
       RightState=thesteps(10, 11, 12, 13, twice,RightState);
       switch(RightState){
         case 1:
@@ -152,6 +161,15 @@ void Left(bool anticlockwise,bool twice){
     //Serial.print("--LEFT--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+          switch(LeftState){
+        case 1:
+            LeftState=3;
+        break;
+        case 3:
+            LeftState=1;
+        break;
+
+      }
       LeftState=thesteps(6, 7, 8, 9, twice, LeftState);
       switch(LeftState){
         case 1:
@@ -172,6 +190,14 @@ void Up(bool anticlockwise,bool twice){
     //Serial.print("--UP--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+          switch(UpState){
+        case 1:
+            UpState=3;
+        break;
+        case 3:
+            UpState=1;
+        break;
+      }
       UpState=thesteps(2, 3, 4, 5, twice, UpState);
       switch(UpState){
         case 1:
@@ -191,6 +217,14 @@ void Down(bool anticlockwise,bool twice){
     //Serial.print("--DOWN--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+          switch(DownState){
+        case 1:
+            DownState=3;
+        break;
+        case 3:
+            DownState=1;
+        break;
+      }
       DownState=thesteps(28, 26, 24, 22, twice, DownState);
       switch(DownState){
         case 1:
@@ -210,6 +244,14 @@ void Front(bool anticlockwise,bool twice){
     //Serial.print("--FRONT--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+          switch(FrontState){
+        case 1:
+            FrontState=3;
+        break;
+        case 3:
+            FrontState=1;
+        break;
+      }
       FrontState=thesteps(36, 34, 32, 30, twice, DownState);
       switch(FrontState){
         case 1:
@@ -229,6 +271,14 @@ void Back(bool anticlockwise,bool twice){
     //Serial.print("--BACK--"); //TESTINGSNIPPET
     if(anticlockwise){
     //Serial.print("ANTICLOCKWISE--"); //TESTINGSNIPPET
+          switch(BackState){
+        case 1:
+            BackState=3;
+        break;
+        case 3:
+            BackState=1;
+        break;
+      }
       BackState=thesteps(46, 44, 42, 40, twice, BackState);
       switch(BackState){
         case 1:
