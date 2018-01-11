@@ -18,6 +18,7 @@ algs=["R U B' R B R2 U' R' F R F'", "F R U R' U' F' U2 F U R U' R' F'", "F U R U
 def solveoll(col):
     pre = ""
     flag = 0
+    fulloll=""
     t=time.time()
     for x in range(4):
         tcol = [y[:] for y in col]
@@ -39,7 +40,7 @@ def solveoll(col):
             tcol[1][7] == "yellow" and tcol[1][8]=="yellow" and tcol[2][6]=="yellow" and tcol[2][7]=="yellow" and tcol[2][8]=="yellow"):
                 fulloll=pre + " " + i
                 moves.breakscram(i, col)
-                #print(fulloll)
+                print(fulloll)
                 flag=1
                 break
         if flag == 1:

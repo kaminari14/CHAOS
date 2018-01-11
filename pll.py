@@ -15,6 +15,7 @@ def solvepll(col):
     pre = ""
     post = ""
     flag = 0
+    fullpll=""
     t=time.time()
     for x in range(4):
         tcol = [x[:] for x in col]
@@ -50,7 +51,7 @@ def solvepll(col):
                         break
                 fullpll = pre + " " + i + " " + post
                 moves.breakscram(i + " " + post, col)
-                #print(fullpll)
+                print(fullpll)
                 flag = 1
                 break
         if flag == 1:

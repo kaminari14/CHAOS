@@ -54,7 +54,7 @@ void thesteps(int pina,int pinb,int pinc,int pind, bool twice,int isrev){
       stepnums=127;
       break;
       case 1:
-      stepnums=128;
+      stepnums=127;
       break;
     }
   }

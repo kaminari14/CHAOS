@@ -16,10 +16,12 @@ def dof2l(col):
             tcol = [x[:] for x in col]
             moves.breakscram(i,tcol)
             hap=happiness(tcol, i)
+            #if i==" R' U R":
+            #    print("------", hap)
             if hap>= max:
                 max=hap
                 maxi=i
-        #print(maxi, max)
+        print(maxi, max)
         fsol=fsol+maxi
         moves.breakscram(maxi, col)
     u=time.time()
@@ -78,9 +80,9 @@ def happiness(col,scram):
         if (col[0][6]==col[3][4] and col[3][2]==col[1][6]):
             if (col[8][8] == "white" and col[4][0] == "blue" and col[5][0] == "blue"
                 and col[4][11] == "orange" and col[5][11] == "orange"):
-                meter=meter+0.01
+                meter=meter+0.0001
             else:
-                meter=meter+0.05
+                meter=meter+0.0005
 
 
     if (col[3][0] == "white"):
@@ -117,9 +119,9 @@ def happiness(col,scram):
         if (col[0][8]==col[3][1] and col[3][11]==col[0][7]):
             if (col[6][8] == "white" and col[5][8] == "green" and col[4][8] == "green"
                 and col[5][9] == "orange" and col[4][9] == "orange"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
     if (col[3][2]=="white"):
@@ -156,9 +158,9 @@ def happiness(col,scram):
         if (col[0][6]==col[3][1] and col[3][3]==col[0][7]):
             if (col[6][6] == "white" and col[5][5] == "red" and col[4][5] == "red"
                 and col[4][6] == "green" and col[5][6] == "green"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
     if (col[3][5]=="white"):
@@ -195,9 +197,9 @@ def happiness(col,scram):
         if (col[2][6]==col[3][4] and col[3][6]==col[1][6]):
             if (col[6][8] == "white" and col[5][8] == "green" and col[4][8] == "green"
                 and col[5][9] == "orange" and col[4][9] == "orange"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
     if (col[3][6]=="white"):
@@ -234,9 +236,9 @@ def happiness(col,scram):
         if (col[2][6]==col[3][7] and col[3][5]==col[2][7]):
             if (col[8][6] == "white" and col[5][2] == "blue" and col[4][2] == "blue"
                 and col[5][3] == "red" and col[4][2] == "red"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
     if (col[3][8]=="white"):
@@ -273,9 +275,9 @@ def happiness(col,scram):
         if (col[2][8]==col[3][7] and col[3][9]==col[2][7]):
             if (col[8][8] == "white" and col[4][0] == "blue" and col[5][0] == "blue"
                 and col[4][11] == "orange" and col[5][11] == "orange"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
     if (col[3][9]=="white"):
         if ((col[2][8]==col[0][7] and col[3][8]==col[3][1]) or
@@ -311,9 +313,9 @@ def happiness(col,scram):
         if (col[2][8]==col[3][10] and col[3][8]==col[1][8]):
             if (col[6][6] == "white" and col[5][5] == "red" and col[4][5] == "red"
                 and col[4][6] == "green" and col[5][6] == "green"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
     if (col[3][11]=="white"):
@@ -350,9 +352,9 @@ def happiness(col,scram):
         if (col[0][8]==col[3][10] and col[3][0]==col[1][8]):
             if (col[8][6] == "white" and col[5][2] == "blue" and col[4][2] == "blue"
                 and col[5][3] == "red" and col[4][2] == "red"):
-                meter = meter + 0.01
+                meter = meter + 0.0001
             else:
-                meter = meter + 0.05
+                meter = meter + 0.0005
 
 
 
