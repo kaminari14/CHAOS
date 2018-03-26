@@ -167,7 +167,7 @@ def happiness(col,scram):
         if ((col[2][6]==col[0][7] and col[3][6]==col[3][1]) or
         (col[2][6]==col[1][8] and col[3][6]==col[3][10])):
             if (col[8][6] == "white" and col[5][2] == "blue" and col[4][2] == "blue"
-                and col[5][3] == "red" and col[4][2] == "red"):
+                and col[5][3] == "red" and col[4][3] == "red"):
                 meter=meter+0.01
             else:
                 meter=meter+0.05
