@@ -1,6 +1,4 @@
 import time
-from copy import deepcopy
-
 import crawl
 import moves
 
@@ -89,7 +87,7 @@ def happiness(col,scram):
         if ((col[0][8] == col[2][7] and col[3][11] == col[3][7]) or
         (col[0][8] == col[1][6] and col[3][11] == col[3][4])):
             if (col[8][6] == "white" and col[5][2] == "blue" and col[4][2] == "blue"
-                and col[5][3] == "red" and col[4][2] == "red"):
+                and col[5][3] == "red" and col[4][3] == "red"):
                 meter = meter + 0.01
             else:
                 meter = meter + 0.05

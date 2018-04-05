@@ -104,20 +104,4 @@ print("full solution:", fullsol)
 print("solution length:", len(fullsol.split(" ")))
 
 print(time.time()-t)
-'''
-p=-1
-for j in range(10, 270, 30):
-    p+=1
-    q=-1
-    for i in range (10,360, 30):
-        q+=1
-        if p<3 and (q<6 or q>8):
-            continue
-        if p>5 and (q<6 or q>8):
-            continue
-        rect=Rectangle(Point(i,j),Point(i+20,j+20))
-        rect.setFill(col[p][q])
-        rect.draw(win)
-win.getMouse()
-win.close()
-'''
+

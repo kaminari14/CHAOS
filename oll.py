@@ -13,7 +13,7 @@ algs=["R U B' R B R2 U' R' F R F'", "F R U R' U' F' U2 F U R U' R' F'", "F U R U
       "F U R2 D R' U' R D' R2 F'", "R' U' R U' R' U2 R F R U R' U' F'", "F' U' L' U L F", "F U R U' R' F'", "F R U R' U' F'",
       "R' U' R' F R F' U R", "F' L' U' L U L' U' L U F", "F R U R' U' R U R' U' F'","R B' R2 F R2 B R2 F' R", "R' F R2 B' R2 F' R2 B R'",
       "F U R U' R' U R U' R' F'", "R' U' R U' R' U F' U F R", "F' L F L' U2 F2 R' F' R F'", "F' L' U' L U L' U L U' L' U' L F",
-      "R U2 R2 U' R U' R' U2 F R F'", "F R U R' U' R F' L F R' F' L'", "R U R' U' R' L F R F' L'"]
+      "R U2 R2 U' R U' R' U2 F R F'", "F R U R' U' R F' L F R' F' L'", "R U R' U' R' L F R F' L'",""]
 
 def solveoll(col):
     pre = ""

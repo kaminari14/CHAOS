@@ -8,7 +8,7 @@ algs=["R' F R' B2 R F' R' B2 R2", "R2 B2 R F R' B2 R F' R", "R2 U R2 U D R2 U' R
       "R' U L' U2 R U' L R' U L' U2 R U' L", "L U2 L' U2 L F' L' U' L U L F L2", "R' U2 R U2 R' F R U R' U' R' F' R2",
       "R U R' U' R' F R2 U' R' U' R U R' F'", "R2 U' R' U' R U R U R U' R", "R2 U R U R' U' R' U' R' U R'",
       "R U2 R' D R U' R U' R U R2 D R' U' R D2", "F R' F R2 U' R' U' R U R' F' R U R' U' F'",
-      "R' U' R2 U R U R' U' R U R U' R U' R'"]
+      "R' U' R2 U R U R' U' R U R U' R U' R'", ""]
 
 
 def solvepll(col):

@@ -21,7 +21,6 @@ def whatnext(tsol,i):
                 continue
         if len(tsol.split())>2:
             break
-
         whatnext(tsol,j,)
 
 whatnext(tsol,i)
