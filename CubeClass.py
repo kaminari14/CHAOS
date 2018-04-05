@@ -10,10 +10,17 @@ class _SideLayout(urwid.TextLayout):
 class _LogoLayout(urwid.TextLayout):
     def layout(self, text, width, align, wrap):
         self.align='right'
-        return [[(37, 0, 37)], [(37, 37, 74)], [(37, 74, 111)], [(37, 111, 148)], [(37, 148, 185)], [(37, 185, 222)],
-                [(37, 222, 259)], [(37, 259, 296)], [(37, 296, 333)], [(37, 333, 370)], [(37, 370, 407)], [(37, 407, 444)]
-            , [(37, 444, 481)], [(37, 481, 518)], [(37, 518, 555)], [(37, 555, 592)]]
+        return [[(41, 0, 41)], [(41, 41, 82)], [(41, 82, 123)], [(41, 123, 164)], [(41, 164, 205)], [(40, 205, 246)]]
 
+class testingOR(urwid.Text):
+    def selectable(self):
+        return True
+    def keypress(self,size,key):
+        if key == 'enter':
+           logs.write("HELLOFRIEND:SHARK")
+           return None
+        else:
+            return key
 
 '''
 class _StatusLayout(urwid.TextLayout):
@@ -26,7 +33,7 @@ class _StatusLayout(urwid.TextLayout):
             if diff/width==
 '''
 
-class cube:
+class cube(urwid.PopUpLauncher):
     def __init__(self):
         self._up = []
         self._down = []
@@ -55,6 +62,9 @@ class cube:
         self.set_cube_array()
         self.thesolution=""
         self.position=0
+
+    def create_pop_up(self):
+        return urwid.Pile(widget_list=[urwid.Text("hello"), urwid.Text("darkness"), urwid.Text("myold")])
 
     def _draw_boxes(self,itteration,colorofside):
         thetext=""
@@ -224,47 +234,52 @@ class cube:
     def draw_cube(self):
         blank = urwid.Text(" "*162, layout=_SideLayout())
         try:
-            self.up = urwid.Text(self._up, layout=_SideLayout())
+            self.up = testingOR(self._up, layout=_SideLayout())
         except IndexError:
-            self.up = urwid.Text(" "*162, layout=_SideLayout())
+            self.up = testingOR(" "*162, layout=_SideLayout())
 
         try:
-            self.down = urwid.Text(self._down, layout=_SideLayout())
+            self.down = testingOR(self._down, layout=_SideLayout())
         except IndexError:
-            self.down = urwid.Text(" "*162, layout=_SideLayout())
+            self.down = testingOR(" "*162, layout=_SideLayout())
 
         try:
-            self.left = urwid.Text(self._left, layout=_SideLayout())
+            self.left = testingOR(self._left, layout=_SideLayout())
         except IndexError:
-            self.left = urwid.Text(" "*162, layout=_SideLayout())
+            self.left = testingOR(" "*162, layout=_SideLayout())
 
         try:
-            self.right = urwid.Text(self._right, layout=_SideLayout())
+            self.right = testingOR(self._right, layout=_SideLayout())
         except IndexError:
-            self.right = urwid.Text(" "*162, layout=_SideLayout())
+            self.right = testingOR(" "*162, layout=_SideLayout())
 
         try:
-            self.front = urwid.Text(self._front, layout=_SideLayout())
+            self.front = testingOR(self._front, layout=_SideLayout())
         except IndexError:
-            self.front = urwid.Text(" "*162, layout=_SideLayout())
+            self.front = testingOR(" "*162, layout=_SideLayout())
 
         try:
-            self.back = urwid.Text(self._back, layout=_SideLayout())
+            self.back = testingOR(self._back, layout=_SideLayout())
         except IndexError:
-            self.back = urwid.Text(" "*162, layout=_SideLayout())
+            self.back = testingOR(" "*162, layout=_SideLayout())
 
         #CUBE LAYOUT
-        gf1 = urwid.GridFlow([blank, self.up, blank, blank, self.left, self.front, self.right, self.back, blank, self.down, blank, blank],
+        self.gf1 = urwid.GridFlow([blank, urwid.AttrMap(self.up,'bg',focus_map='form'),
+                                   blank, blank, urwid.AttrMap(self.left,'bg',focus_map='form'),
+                                   urwid.AttrMap(self.front,'bg',focus_map='form'),
+                                   urwid.AttrMap(self.right,'bg',focus_map='form'),
+                                   urwid.AttrMap(self.back,'bg',focus_map='form'),
+                                   blank, urwid.AttrMap(self.down,'bg',focus_map='form'), blank, blank],
                              cell_width=18, h_sep=1, v_sep=1, align="center")
         #CUBE LAYOUT ENDS
 
         #RIGHT FORM
-        txt_logo = urwid.Text("██████╗██╗  ██╗ █████╗  ██████╗ ███████╗"+
+        txt_logo = urwid.Text("███████╗██╗  ██╗ █████╗  ██████╗ ███████╗"+
                               "██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔════╝"+
                               "██║     ███████║███████║██║   ██║███████╗"+
                               "██║     ██╔══██║██╔══██║██║   ██║╚════██║"+
                               "╚██████╗██║  ██║██║  ██║╚██████╔╝███████║"+
-                              " ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝")
+                              " ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝", layout=_LogoLayout())
 
         txt_logo_attr = urwid.AttrMap(txt_logo,'bg','form')
 
@@ -276,26 +291,29 @@ class cube:
 
         self.btn_submit = urwid.Button("  BEGIN  ",user_data=self.thescramble)
         btn_submit_attr = urwid.AttrMap(self.btn_submit,'bg','form')
+        btn_submit_attr=urwid.Padding(btn_submit_attr,align='center', width=15) #try ('relative',%age)
 
         self.btn_quit = urwid.Button("  EXIT  ",user_data=" ")
         btn_quit_attr = urwid.AttrMap(self.btn_quit,'btn_quit','form')
+        btn_quit_attr=urwid.Padding(btn_quit_attr,align='center', width=15)
 
-        right_form = urwid.GridFlow([txt_logo_attr,self.txt_scramble_attr,txt_OR_attr,chk_scan_attr,btn_submit_attr,btn_quit_attr],cell_width=88,v_sep=1,align='center',h_sep=0)
+        right_form = urwid.GridFlow([txt_logo_attr,self.txt_scramble_attr,btn_submit_attr,btn_quit_attr],cell_width=88,v_sep=1,align='center',h_sep=0)
         right_form.set_focus(1)
 
         #RIGHT FORM ENDS
 
         #FULL BODY
-        body1 = urwid.Columns([(2,urwid.Text(" ")),(76,gf1),right_form])
+        body1 = urwid.Columns([(2, urwid.Text(" ")), (76,self.gf1), right_form])
         body1.set_focus(2)
-        right_form.set_focus(1)
+        #self.gf1.set_focus(1)
+        #right_form.set_focus(1)
         body1 = urwid.Filler(body1)
-        body1=urwid.AttrMap(body1,"bg")
+        body1=urwid.AttrMap(body1, "bg")
         #FULL BODY ENDS
 
-        header1 = urwid.Text(("header", "CHAOS Has A Other Side"), align="center")
+        header1 = urwid.Text(("header", "CHAOS Has An Other Side"), align="center")
         header1 = urwid.AttrMap(header1,"header")
-        self.footer1 = urwid.Text(("header","statusline is here"))
+        self.footer1 = urwid.Text(("header","ready to solve!"))
         footer1attr = urwid.AttrMap(self.footer1,"header")
 
         #THEFRAME

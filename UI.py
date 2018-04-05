@@ -1,5 +1,4 @@
 import sys
-import tempfile
 import serial
 import copy
 import urwid
@@ -16,8 +15,7 @@ handle_check_serial = ""
 handle_loading = ""
 loadcount=0
 logs = CubeClass.logs
-#look_file = tempfile.TemporaryFile()
-look_file = open('.temp','w+')
+# look_file = tempfile.TemporaryFile()
 
 palette = [
     ("O", "", "", "", "h16", "h166"),
@@ -70,7 +68,6 @@ def onclick(key):  # {
 
 
 def on_submit(button, user_data):
-    global semaphorefinally, semaphorepll, semaphoreoll, semaphoref2, semaphorecross
     if (cube.chk_scan.get_state == True):
         cube.txt_scramble.set_edit_text("")
         # code for scanning goes here
@@ -84,13 +81,7 @@ def on_submit(button, user_data):
         ml.draw_screen()
         do_logic()# sets solution
 
-
-
-
-
-
 def on_quit(button, user_data):
-    look_file.close()
     raise urwid.ExitMainLoop()
 
 
@@ -175,6 +166,10 @@ def loadingstatus(theml,data):
     theml.draw_screen()
     handle_loading=theml.set_alarm_in(0.5,loadingstatus,"")
 
+def testpopup(data):
+    logs.write("VSAUCE::"+data)
+    cube.open_pop_up()
+
 
 if len(sys.argv)!=2:
     valid=False
@@ -185,12 +180,13 @@ else:
 
 if valid:
     thescreen = cube.draw_cube()
-    logicthread = threading.Thread(target=do_logic)
+    #logicthread = threading.Thread(target=do_logic)
     urwid.connect_signal(cube.txt_scramble, 'change', set_scramble)
     urwid.connect_signal(cube.chk_scan, 'change', clear_scramble)
     urwid.connect_signal(cube.btn_quit, 'click', on_quit, "")
     urwid.connect_signal(cube.btn_submit, 'click', on_submit, cube.thescramble)
-    ml = urwid.MainLoop(thescreen, palette, unhandled_input=onclick)
+    #urwid.connect_signal(cube.gf1.contents[1][0],'',testpopup,"michael here")
+    ml = urwid.MainLoop(thescreen, palette, unhandled_input=onclick,pop_ups=True)
     ml.screen.set_terminal_properties(colors=256)
     urwid.set_encoding("utf-8")
     ml.run()
