@@ -6,7 +6,7 @@ import oll
 import pll
 import time
 
-logs = open("/tmp/logf.txt", "a")
+#logs = open("/tmp/logf.txt", "a")
 
 #win= GraphWin("my win", 600, 600)
 
@@ -104,4 +104,3 @@ print("full solution:", fullsol)
 print("solution length:", len(fullsol.split(" ")))
 
 print(time.time()-t)
-

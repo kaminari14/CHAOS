@@ -1,5 +1,5 @@
 import time
-from line_profiler import LineProfiler
+#from line_profiler import LineProfiler
 import crawl
 import moves
 

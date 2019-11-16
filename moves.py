@@ -1,5 +1,5 @@
 from copy import deepcopy
-from line_profiler import LineProfiler
+#from line_profiler import LineProfiler
 
 tcol=[["" for i in range(12)] for j in range(9)]
 
