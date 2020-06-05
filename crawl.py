@@ -19,7 +19,7 @@ def whatnext(tsol,i):
             (tsol.split()[len(tsol.split())-2][0] =="U" and tsol.split()[len(tsol.split())-1][0]== "D" and j[0]=="U") or
             (tsol.split()[len(tsol.split())-2][0] =="D" and tsol.split()[len(tsol.split())-1][0]== "U" and j[0]=="D")):
                 continue
-        if len(tsol.split())>2:
+        if len(tsol.split())>3:
             break
         whatnext(tsol,j,)
 
